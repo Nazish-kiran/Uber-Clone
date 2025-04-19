@@ -51,7 +51,7 @@ The request must contain the following fields:
   "socketId": "socket_id_12345"
 }
 ```
-## Endpoint: `/users/login`
+## 📌 Endpoint: `/users/login`
 
 ### Method: `POST`
 
@@ -88,4 +88,52 @@ The request must be in JSON format and contain the following fields:
 {
   "email": "user@example.com",
   "password": "password123"
+}
+```
+
+## 📌 Endpoint: `/users/profile`
+
+### Method: `GET`
+
+Fetches the profile information of the currently authenticated user. This route is **protected** and requires a valid token stored in cookies.
+
+---
+
+### 🔒 Authentication
+
+This endpoint uses the `authMiddleware` to validate JWT from cookies. The token must be present in an **HTTP-only cookie** named `token`.
+
+---
+
+### ✅ Sample Response
+
+```json
+{
+  "_id": "65fbb56e6a6f3b0012ab12cd",
+  "firstname": "John",
+  "lastname": "Doe",
+  "email": "user@example.com",
+  "socketId": "socket_id_12345"
+}
+```
+
+## 📌 Endpoint: `/users/logout`
+
+### Method: `GET`
+
+Logs out the currently authenticated user by clearing the authentication token from cookies.
+
+---
+
+### 🔒 Authentication
+
+This endpoint is **protected** and requires a valid `token` stored in cookies.
+
+---
+
+### ✅ Sample Response
+
+```json
+{
+  "message": "Logout successfully"
 }
