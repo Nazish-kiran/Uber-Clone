@@ -1,40 +1,46 @@
-# User Registration API Documentation
+# User API Documentation
 
-This API allows users to register by providing their personal details such as email, first name, last name, password, and socketId. The endpoint validates the inputs and stores the user in the database if they are valid.
+This API provides user authentication functionality, including user **registration** and **login**. Below are the details for both endpoints.
 
-## Endpoint: `/users/register`
+---
+
+## 📌 Endpoint: `/users/register`
 
 ### Method: `POST`
 
-This endpoint allows a user to register by providing their information. It performs validation checks and returns a token upon successful registration.
+Registers a new user by accepting personal details and creating a record in the database. A JWT token is returned upon successful registration.
 
-### Request Body
+---
 
-The request body should be a JSON object containing the following fields:
+### ✅ Request Body
 
-- `email` (string): The email address of the user. **Required**. Must be a valid email format.
-- `firstname` (string): The first name of the user. **Required**. Minimum length of 3 characters.
-- `lastname` (string): The last name of the user. **Required**. Minimum length of 3 characters.
-- `password` (string): The password for the user's account. **Required**.
-- `socketId` (string): The socket ID for the user. **Required**.
+The request must contain the following fields:
 
-### Validation Rules
+| Field      | Type   | Required | Description                             |
+|------------|--------|----------|-----------------------------------------|
+| email      | String | Yes      | Must be a valid email address.          |
+| firstname  | String | Yes      | Minimum 3 characters.                   |
+| lastname   | String | Yes      | Minimum 3 characters.                   |
+| password   | String | Yes      | User's password.                        |
+| socketId   | String | Yes      | Socket ID for the user.                 |
 
-1. **email**: 
-   - Must be a valid email format.
-   - Error message: `"Invalid Email"`
-2. **firstname**:
-   - Must have at least 3 characters.
-   - Error message: `"First name must be at least 3 characters long"`
-3. **lastname**:
-   - Must have at least 3 characters.
-   - Error message: `"Last name must be at least 3 characters long"`
-4. **password**: 
-   - Must be provided (this field is required but not explicitly validated in this part).
-5. **socketId**:
-   - Must be provided.
+---
 
-### Sample Request
+### 🛡️ Validation Rules
+
+- **email**:
+  - Must be a valid email format.
+  - Error: `"Invalid Email"`
+- **firstname**:
+  - Minimum 3 characters.
+  - Error: `"First name must be at least 3 characters long"`
+- **lastname**:
+  - Minimum 3 characters.
+  - Error: `"Last name must be at least 3 characters long"`
+
+---
+
+### 📤 Sample Request
 
 ```json
 {
@@ -43,4 +49,43 @@ The request body should be a JSON object containing the following fields:
   "lastname": "Doe",
   "password": "password123",
   "socketId": "socket_id_12345"
+}
+```
+## Endpoint: `/users/login`
+
+### Method: `POST`
+
+Authenticates a user using their email and password. If the credentials match a registered user, a token and user data are returned.
+
+---
+
+### ✅ Request Body
+
+The request must be in JSON format and contain the following fields:
+
+| Field    | Type   | Required | Description                             |
+|----------|--------|----------|-----------------------------------------|
+| email    | String | Yes      | Must be a valid email address.          |
+| password | String | Yes      | Must be at least 6 characters long.     |
+
+---
+
+### 🛡️ Validation Rules
+
+- **email**:
+  - Must be a valid email format.
+  - Error: `"Invalid Email"`
+
+- **password**:
+  - Minimum 6 characters.
+  - Error: `"Password must be at least 6 characters long"`
+
+---
+
+### 📤 Sample Request
+
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
 }
