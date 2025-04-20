@@ -96,6 +96,6 @@ router.post(
   ],
   loginCaptain
 );
-router.post("/logout",authCaptain,logoutCaptain);
+router.get("/logout",authCaptain,logoutCaptain);
 
 export default router;

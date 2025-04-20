@@ -241,3 +241,26 @@ The request must be in JSON format and include:
   "email": "ali.khan@example.com",
   "password": "strongpassword"
 }
+```
+## 📌 Endpoint: `/captains/logout`
+
+### Method: `GET`
+
+Logs out the currently authenticated **Captain** by clearing the authentication token from the client's cookies.
+
+---
+
+### 🔒 Authentication
+
+This route is **protected** and requires a valid JWT token in an **HTTP-only cookie** named `token`.  
+The `authCaptain` middleware is used to verify authentication before proceeding.
+
+---
+
+### ✅ Sample Response
+
+```json
+{
+  "message": "Logout successfully"
+}
+```
