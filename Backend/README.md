@@ -137,3 +137,64 @@ This endpoint is **protected** and requires a valid `token` stored in cookies.
 {
   "message": "Logout successfully"
 }
+```
+## 📌 Endpoint: `/captains/register`
+
+### Method: `POST`
+
+Registers a new **Captain** by collecting personal and vehicle-related information. A JWT token is returned upon successful registration and is stored in an **HTTP-only cookie**.
+
+---
+
+### ✅ Request Body
+
+The request must be in JSON format and contain the following fields:
+
+| Field       | Type     | Required | Description                                      |
+|-------------|----------|----------|--------------------------------------------------|
+| firstname   | String   | Yes      | Minimum 3 characters.                            |
+| lastname    | String   | Yes      | Minimum 3 characters.                            |
+| email       | String   | Yes      | Must be a valid, unique email address.           |
+| password    | String   | Yes      | Password for the captain.                        |
+| socketId    | String   | Yes      | Socket ID for real-time communication.           |
+| vehicle     | Object   | Yes      | Contains details about the captain's vehicle.    |
+| └─ color    | String   | Yes      | Minimum 3 characters.                            |
+| └─ capacity | Number   | Yes      | Minimum 3 (e.g. 3 passengers).                   |
+| └─ plate    | String   | Yes      | Minimum 3 characters.                            |
+| └─ vehicleType | String | Yes   | One of `"car"`, `"motorcycle"`, `"auto"`.        |
+| location    | Object   | No       | Optional current location of the captain.        |
+| └─ lat      | Number   | No       | Latitude coordinate.                             |
+| └─ lng      | Number   | No       | Longitude coordinate.                            |
+
+---
+
+### 🛡️ Validation Rules
+
+- **Email** must be unique and at least 5 characters.
+- **Firstname, lastname, vehicle color, plate** must be at least 3 characters.
+- **Vehicle capacity** must be at least 3.
+- **Vehicle type** must be one of the accepted values: `"car"`, `"motorcycle"`, `"auto"`.
+
+---
+
+### 📤 Sample Request
+
+```json
+{
+  "firstname": "Ali",
+  "lastname": "Khan",
+  "email": "ali.khan@example.com",
+  "password": "strongpassword",
+  "socketId": "socket_id_98765",
+  "vehicle": {
+    "color": "Black",
+    "capacity": 4,
+    "plate": "XYZ123",
+    "vehicleType": "car"
+  },
+  "location": {
+    "lat": 24.8607,
+    "lng": 67.0011
+  }
+}
+```
