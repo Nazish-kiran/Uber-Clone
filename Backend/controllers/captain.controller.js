@@ -80,6 +80,10 @@ export const loginCaptain = async (req, res) => {
   }
 };
 
+export const getCaptainProfile = async (req, res) => {
+  res.status(200).json('hi captain');
+}
+
 export const logoutCaptain = async (req , res)=>{
   res.clearCookie("token");
   res.status(200).json({ message: "Logout successfully" });
