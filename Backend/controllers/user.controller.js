@@ -10,6 +10,11 @@ export const registerUser = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
+  const existingUser = await userModel.findOne({ email });
+  if (existingUser) {
+    return res.status(409).json({ message: "Email already registered" });
+  }
+  
   const hashedPassword = await userModel.hashPassword(password);
   const user = await userModel.create({
     firstname,
@@ -51,6 +56,6 @@ export const geUserProfile = async (req, res) => {
 };
 
 export const logoutUser = async (req, res) => {
-  res.clearCookie("token")
+  res.clearCookie("token");
   res.status(200).json({ message: "Logout successfully" });
 };
