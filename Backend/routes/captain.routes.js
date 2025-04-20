@@ -1,6 +1,11 @@
 import express from "express";
 import { body } from "express-validator";
-import { registerCaptain } from "../controllers/captain.controller.js";
+import {
+  registerCaptain,
+  loginCaptain,
+  logoutCaptain
+} from "../controllers/captain.controller.js";
+import { authCaptain } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
@@ -91,5 +96,6 @@ router.post(
   ],
   loginCaptain
 );
+router.post("/logout",authCaptain,logoutCaptain);
 
 export default router;

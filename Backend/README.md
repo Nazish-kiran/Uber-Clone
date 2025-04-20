@@ -1,3 +1,7 @@
+# 🚀 Authentication API Documentation
+
+This API provides authentication functionality for two user types: **Users** and **Captains**. It includes endpoints for **registration**, **login**, **profile retrieval**, and **logout**. JWT tokens are used for session management and are stored in **HTTP-only cookies** for added security.
+
 # User API Documentation
 
 This API provides user authentication functionality, including user **registration** and **login**. Below are the details for both endpoints.
@@ -138,6 +142,11 @@ This endpoint is **protected** and requires a valid `token` stored in cookies.
   "message": "Logout successfully"
 }
 ```
+
+# Captain API Documentation
+
+This API provides captain authentication functionality, including user **registration** and **login**. Below are the details for both endpoints.
+
 ## 📌 Endpoint: `/captains/register`
 
 ### Method: `POST`
@@ -198,3 +207,37 @@ The request must be in JSON format and contain the following fields:
   }
 }
 ```
+## 📌 Endpoint: `/captains/login`
+
+### Method: `POST`
+
+Authenticates a captain using email and password. On successful login, returns a JWT token stored in an **HTTP-only cookie**.
+
+---
+
+### 🔒 Authentication
+
+- This route validates the credentials against stored captain records.
+- Password comparison is done using bcrypt.
+- JWT token is generated on success and stored in a secure cookie named `token`.
+
+---
+
+### ✅ Request Body
+
+The request must be in JSON format and include:
+
+| Field     | Type   | Required | Description                          |
+|-----------|--------|----------|--------------------------------------|
+| email     | String | Yes      | Must be a valid registered email.    |
+| password  | String | Yes      | Minimum 6 characters.                |
+
+---
+
+### 📤 Sample Request
+
+```json
+{
+  "email": "ali.khan@example.com",
+  "password": "strongpassword"
+}

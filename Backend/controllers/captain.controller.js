@@ -63,7 +63,7 @@ export const registerCaptain = async (req, res) => {
 export const loginCaptain = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const captain = await captainModel.findOne(email).select("+password");
+    const captain = await captainModel.findOne({email}).select("+password");
 
     if (!captain) {
       return res.status(401).json({ message: "incorrect email or password" });
@@ -79,3 +79,8 @@ export const loginCaptain = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+export const logoutCaptain = async (req , res)=>{
+  res.clearCookie("token");
+  res.status(200).json({ message: "Logout successfully" });
+}

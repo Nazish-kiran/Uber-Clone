@@ -6,7 +6,7 @@ import {
   geUserProfile,
   logoutUser,
 } from "../controllers/user.controller.js";
-import authMiddleware from "../middlewares/auth.middleware.js";
+import {authUser} from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
@@ -38,7 +38,7 @@ router.post(
   loginUser
 );
 
-router.get("/profile", authMiddleware, geUserProfile);
-router.get("/logout", authMiddleware, logoutUser);
+router.get("/profile", authUser, geUserProfile);
+router.get("/logout", authUser, logoutUser);
 
 export default router;
