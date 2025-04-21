@@ -105,7 +105,7 @@ Fetches the profile information of the currently authenticated user. This route 
 
 ### 🔒 Authentication
 
-This endpoint uses the `authMiddleware` to validate JWT from cookies. The token must be present in an **HTTP-only cookie** named `token`.
+This endpoint uses the `userAuth` to validate JWT from cookies. The token must be present in an **HTTP-only cookie** named `token`.
 
 ---
 
