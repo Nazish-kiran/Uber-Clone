@@ -13,7 +13,7 @@ const page = () => {
 
   const handleSumbit = async (e) => {
     e.preventDefault();
-    setdata({ email, password, username: { firstName, lastName } });
+    setdata({ email, password, fullName: { firstName, lastName } });
     setemail("");
     setpassword("");
     setfirstName("");
@@ -34,10 +34,10 @@ const page = () => {
             alt="logo"
             width={10}
             height={10}
-            className="w-16 mb-10"
+            className="w-20 mb-2"
           ></Image>
           <form action="" onSubmit={(e) => handleSumbit(e)}>
-            <h3 className="text-lg font-medium mb-2">What's your name</h3>
+            <h3 className="text-lg font-medium mb-2">What's our Captain's name</h3>
             <div className="flex gap-4 mb-6">
               <input
                 type="text"
@@ -60,7 +60,7 @@ const page = () => {
                 onChange={(e) => setlastName(e.target.value)}
               />
             </div>
-            <h3 className="text-lg font-medium mb-2">What's your email</h3>
+            <h3 className="text-lg font-medium mb-2">What's our Captain's email</h3>
             <input
               type="email"
               name=""
@@ -87,7 +87,7 @@ const page = () => {
             </button>
             <p className="text-center font-medium">
               Already have a account?{" "}
-              <Link href="/UserLogin" className="text-blue-600">
+              <Link href="/CaptainLogin" className="text-blue-600">
                 Login here
               </Link>
             </p>
@@ -95,9 +95,8 @@ const page = () => {
         </div>
         <div>
           <p className="text-[10px] leading-tight ">
-            By proceeding, you consent to get calls, WhatsApp or SMS messages,
-            including by automated means, from User and its affiliates to the
-            number provided.{" "}
+            This site protected by reCAPTCHA and the Google{" "}
+            <span className="font-bold underline">Privacy Policy</span> and <span className="font-bold underline">Terms of Service</span> apply{" "}
           </p>
         </div>
       </div>

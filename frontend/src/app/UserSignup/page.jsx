@@ -13,7 +13,7 @@ const page = () => {
 
   const handleSumbit = async (e) => {
     e.preventDefault();
-    setdata({ email, password, username: { firstName, lastName } });
+    setdata({ email, password, fullName: { firstName, lastName } });
     setemail("");
     setpassword("");
     setfirstName("");

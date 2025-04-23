@@ -1,3 +1,4 @@
+import UserContext from "./Context/UserContext.jsx";
 import "./globals.css";
 
 export const metadata = {
@@ -8,9 +9,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`antialiased`} cz-shortcut-listen="true">
-        {children}
-      </body>
+      <UserContext>
+        <body
+          className={`antialiased`}
+          cz-shortcut-listen="true"
+          suppressHydrationWarning
+        >
+          {children}
+        </body>
+      </UserContext>
     </html>
   );
 }
