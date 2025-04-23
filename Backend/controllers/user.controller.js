@@ -3,7 +3,7 @@ import { cookie, validationResult } from "express-validator";
 
 export const registerUser = async (req, res) => {
   const { firstname, lastname, email, password, socketId } = req.body;
-  if ((!firstname || !lastname || !email || !password, socketId)) {
+  if ((!firstname || !lastname || !email || !password)) {
     console.log("All fields are required");
   }
   const errors = validationResult(req);

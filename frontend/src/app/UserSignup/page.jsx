@@ -2,29 +2,50 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import {UserDataContext} from "../Context/UserContext.jsx";
 
 const page = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
+  const [UserData, setUserData] = useState({});
 
-  const [userData, setdata] = useState({});
+  const {User , setUser} = React.useContext(UserDataContext);
+  const router = useRouter();
 
   const handleSumbit = async (e) => {
     e.preventDefault();
-    setdata({ email, password, fullName: { firstName, lastName } });
-    setemail("");
-    setpassword("");
-    setfirstName("");
-    setlastName("");
-  };
+    const newUser = {
+      email: email,
+      password: password,
+      firstname: firstName,
+      lastname: lastName,
+    };
 
-  useEffect(() => {
-    if (userData.email || userData.password || userData.username) {
-      console.log("Submitted data:", userData);
+    console.log("Sending user:", newUser);
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/users/register`,
+        newUser
+      );
+
+      if (response.status === 201) {
+        const data = response.data;
+        setUser(data.user);
+        console.log("User registered:", response.data.user);
+        router.push("/Home");
+      }
+      setemail("");
+      setpassword("");
+      setfirstName("");
+      setlastName("");
+    } catch (error) {
+      console.log("Error during registration:", error.response?.data || error);
     }
-  }, [userData]);
+  };
   return (
     <>
       <div className="p-7 flex flex-col justify-between h-screen ">
@@ -83,7 +104,7 @@ const page = () => {
               onChange={(e) => setpassword(e.target.value)}
             />
             <button className="bg-[#111] mb-3 text-white px-4 py-2 rounded w-full text-lg font-semibold cursor-pointer">
-              Login
+              Create Account
             </button>
             <p className="text-center font-medium">
               Already have a account?{" "}

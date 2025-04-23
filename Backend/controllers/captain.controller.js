@@ -18,7 +18,6 @@ export const registerCaptain = async (req, res) => {
       !lastname ||
       !email ||
       !password ||
-      !socketId ||
       !vehicle
     ) {
       console.log("All fields are required");
