@@ -32,7 +32,9 @@ const page = () => {
             className="w-20 mb-2"
           ></Image>
           <form action="" onSubmit={(e) => handleSumbit(e)}>
-            <h3 className="text-lg font-medium mb-2">What's our Captain's email</h3>
+            <h3 className="text-lg font-medium mb-2">
+              What's our Captain's email
+            </h3>
             <input
               type="email"
               name=""

@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useState ,createContext } from "react";
+import React, { useState, createContext } from "react";
 
 export const UserDataContext = createContext();
 
@@ -15,7 +14,9 @@ const UserContext = ({ children }) => {
 
   return (
     <>
-      <UserDataContext.Provider value={{User , setUser}}>{children}</UserDataContext.Provider>
+      <UserDataContext.Provider value={{ User, setUser }}>
+        {children}
+      </UserDataContext.Provider>
     </>
   );
 };
