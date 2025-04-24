@@ -11,7 +11,6 @@ const page = () => {
   const [password, setpassword] = useState("");
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
-  const [UserData, setUserData] = useState({});
 
   const {User , setUser} = React.useContext(UserDataContext);
   const router = useRouter();

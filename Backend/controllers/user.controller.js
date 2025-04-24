@@ -45,7 +45,7 @@ export const loginUser = async (req, res) => {
     const token = user.generateAuthToken();
     res.cookie("token", token);
 
-    res.status(200).json({ user, token });
+    res.status(201).json({ user, token });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }

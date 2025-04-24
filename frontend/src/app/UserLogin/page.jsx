@@ -2,24 +2,42 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
+import { UserDataContext } from "../Context/UserContext.jsx";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const [userData, setdata] = useState({});
+
+  const { User, setUser } = React.useContext(UserDataContext);
+  const router = useRouter();
 
   const handleSumbit = async (e) => {
     e.preventDefault();
-    setdata({ email, password });
-    setemail("");
-    setpassword("");
+    try {
+      const newUser = {
+        email: email,
+        password: password,
+      };
+
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/users/login`,
+        newUser
+      );
+      if (response.status === 201) {
+        const data = response.data;
+        setUser(data.user);
+        console.log("User loggedin:", data.user);
+        router.push("/Home");
+      }
+      setemail("");
+      setpassword("");
+    } catch (error) {
+      console.log("Error during registration:", error.response?.data || error);
+    }
   };
 
-  useEffect(() => {
-    if (userData.email || userData.password) {
-      console.log("Submitted data:", userData);
-    }
-  }, [userData]);
   return (
     <>
       <div className="p-7 flex flex-col justify-between h-screen ">
