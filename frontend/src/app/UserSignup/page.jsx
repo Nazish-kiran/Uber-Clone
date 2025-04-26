@@ -34,6 +34,7 @@ const page = () => {
       if (response.status === 201) {
         const data = response.data;
         setUser(data.user);
+        localStorage.setItem("token", data.token);
         console.log("User registered:", response.data.user);
         router.push("/Home");
       }

@@ -1,9 +1,16 @@
-import React from 'react'
+"use client";
+
+import React from "react";
+import ProtectedUser from "../Components/ProtectedUser.jsx";
 
 const page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <>
+      <ProtectedUser>
+        <div>page</div>
+      </ProtectedUser>
+    </>
+  );
+};
 
-export default page
+export default page;
